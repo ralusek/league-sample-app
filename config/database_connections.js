@@ -16,11 +16,9 @@ module.exports.connectAll = () => {
   console.log('Connecting to all databases...');
 
   return sequelizeConnect.connect(sequelize.primary)
-  // IF UNCOMMENTED WILL FORCE RESYNC THE DATABASE.
-  // .tap(sequelizeClient => {
-  //   setTimeout(() => {
-  //     sequelizeClient.sync({force: true});
-  //     console.log('Force Synced.');
-  //   }, 3500);
-  // });
+  .tap(sequelizeClient => {
+    setTimeout(() => {
+      sequelizeClient.sync({force: false});
+    }, 3500);
+  });
 };
